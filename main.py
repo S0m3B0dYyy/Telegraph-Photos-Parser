@@ -32,7 +32,7 @@ def parse(name, day, month, offset):
     print(f"SEARCH   | Start | {day}.{month}{offset}")
     for item in items:
         src = item.get('src')
-        if not "https" in src:
+        if not "http" in src:
             photos.append(f"https://telegra.ph{src}")
     if photos:
         print(f"{cs.GREEN}DOWNLOAD | Start | {day}.{month}{offset}{cs.END}")
@@ -43,9 +43,11 @@ def parse(name, day, month, offset):
         if not path.isdir(f"{getcwd()}\\images\\{name}\\{day}_{month}_{offset[1:]}"):
             mkdir(f"{getcwd()}\\images\\{name}\\{day}_{month}_{offset[1:]}")
         for i in range(len(photos)):
-            response = requests.get(photos[i], headers = HEADERS)
-            with open(f"images/{name}/{day}_{month}_{offset[1:]}/{month}_{day}_{offset[1:]}_{i}.jpg", "wb") as file:
-                file.write(response.content)
+            try:
+                response = requests.get(photos[i], headers = HEADERS)
+                with open(f"images/{name}/{day}_{month}_{offset[1:]}/{month}_{day}_{offset[1:]}_{i}.jpg", "wb") as file:
+                    file.write(response.content)
+            except: pass
         print(f"{cs.GREEN}DOWNLOAD |  End  | {day}.{month}{offset}{cs.END}")
 
 def main():
