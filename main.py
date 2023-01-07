@@ -40,20 +40,20 @@ def parse(name, day, month, offset):
             mkdir(f"{getcwd()}\\images")
         if not path.isdir(f"{getcwd()}\\images\\{name}"):
             mkdir(f"{getcwd()}\\images\\{name}")
-        if not path.isdir(f"{getcwd()}\\images\\{name}\\{day}_{month}_{offset[1:]}"):
-            mkdir(f"{getcwd()}\\images\\{name}\\{day}_{month}_{offset[1:]}")
+        if not path.isdir(f"{getcwd()}\\images\\{name}\\{month}_{day}_{offset[1:]}"):
+            mkdir(f"{getcwd()}\\images\\{name}\\{month}_{day}_{offset[1:]}")
         for i in range(len(photos)):
             try:
                 response = requests.get(photos[i], headers = HEADERS)
-                with open(f"images/{name}/{day}_{month}_{offset[1:]}/{month}_{day}_{offset[1:]}_{i}.jpg", "wb") as file:
+                with open(f"images/{name}/{month}_{day}_{offset[1:]}/{month}_{day}_{offset[1:]}_{i}.jpg", "wb") as file:
                     file.write(response.content)
             except: pass
         print(f"{cs.GREEN}DOWNLOAD |  End  | {day}.{month}{offset}{cs.END}")
 
 def main():
     print("")
-    for _month in range(start, now.month):
-        for _day in range(1, 31):
+    for _month in range(now.month, start, -1):
+        for _day in range(31, 1, -1):
             for _offset in range(1, int(offset) + 1):
                 if _offset == 1:
                     parse(name, f"{_day:02}", f"{_month:02}", "")
