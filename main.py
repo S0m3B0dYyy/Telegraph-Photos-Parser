@@ -14,10 +14,8 @@ User_Agent = f'{UserAgent().random}'
 
 _ = system("cls")
 name = input(f"{cs.INFO}Name: ")
-age = input("Age: ")
 offset = input("Offset: ")
 now = datetime.now()
-start = int((now - timedelta(days=int(age)*30)).month)
 print(f"Search from: 01.{start:02}{cs.END}")
 
 def parse(name, day, month, offset):
@@ -52,7 +50,7 @@ def parse(name, day, month, offset):
 
 def main():
     print("")
-    for _month in range(now.month, start, -1):
+    for _month in range(1, 12):
         for _day in range(31, 1, -1):
             for _offset in range(1, int(offset) + 1):
                 if _offset == 1:
