@@ -16,7 +16,6 @@ _ = system("cls")
 name = input(f"{cs.INFO}Name: ")
 offset = input("Offset: ")
 now = datetime.now()
-print(f"Search from: 01.{start:02}{cs.END}")
 
 def parse(name, day, month, offset):
     HEADERS = {
